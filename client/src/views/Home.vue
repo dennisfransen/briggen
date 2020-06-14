@@ -20,7 +20,7 @@
     </v-card>
 
     <v-dialog v-model="dialog" width="500">
-      <UseCoins :dialog="dialog" @closeDialog="closeDialog" />
+      <UseCoins :dialog="dialog" @closeDialog="closeDialog" @consumed="getCoins"/>
     </v-dialog>
   </v-container>
 </template>

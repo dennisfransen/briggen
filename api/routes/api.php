@@ -34,6 +34,8 @@ Route::prefix("v1")->group(
                 Route::resource("corporations", "CorporationController")->only(["store", "show", "update"]);
 
                 Route::resource("stamps", "StampController")->only(["show"]);
+                Route::put("/stamps/{stamp}/consume", "StampController@consume")
+                    ->name("stamps.consume");
 
                 Route::resource("vouchers", "VoucherController")->only(["store"]);
                 Route::put("/vouchers/consume", "VoucherController@consume")

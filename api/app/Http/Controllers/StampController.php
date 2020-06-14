@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Stamp;
 use Fasberg\PrettyResponse\Facade\PrettyResponseFacade;
+use Illuminate\Http\Request;
 
 class StampController extends Controller
 {
@@ -17,5 +18,23 @@ class StampController extends Controller
     public function show(Stamp $stamp)
     {
         return PrettyResponseFacade::wrap($stamp->toArray());
+    }
+
+    public function consume(Stamp $stamp, Request $request)
+    {
+        $absoluteCount = abs($request->count);
+
+        if ($stamp->count >= $absoluteCount) {
+            $stamp->count -= $absoluteCount;
+            $stamp->save();
+
+            return PrettyResponseFacade::conditional(true, $stamp->toArray());
+        }
+
+        return PrettyResponseFacade::conditional(false, $stamp->toArray(), [
+            "error" => [
+                "message" => "Du har inte tillräckligt med coins för att göra detta."
+            ]
+        ]);
     }
 }
