@@ -8,8 +8,8 @@
 
     <v-toolbar-title>
       <router-link to="/" class="app-title">
-        <span class="secondary--text font-weight-bold">BRI</span>
-        <span class="secondary--text font-weight-light">GGEN</span>
+        <span class="secondary--text font-weight-bold">DIS</span>
+        <span class="secondary--text font-weight-light">EVENT</span>
       </router-link>
     </v-toolbar-title>
 
