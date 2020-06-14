@@ -1,25 +1,53 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
+import Vouchers from "./Vouchers";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    token: null
+    user: null,
+    loading: false,
+    error: null,
   },
   mutations: {
-    setToken(state, token) {
-      state.token = token;
-    }
+    setUser(state, payload) {
+      state.user = payload;
+    },
+    setLoading(state, payload) {
+      state.loading = payload;
+    },
+    setError(state, payload) {
+      state.error = payload;
+    },
   },
   actions: {
-    setToken({commit}, token) {
-      commit("setToken", token);
+    login({ commit }, { email, password }) {
+      const user = {
+        email: email,
+        password: password,
+      };
+      commit("setUser", user);
     },
-    clearUser({commit}) {
-      commit("setToken", null);
-    }
+    register({ commit }, { email, password, passwordVerify }) {
+      commit("setError", null);
+      commit("setLoading", true);
+      if (password === passwordVerify) {
+        commit("setError", "Lösenordet stämmer inte");
+        commit("setLoading", false);
+        return;
+      }
+
+      const user = {
+        email: email,
+        password: password,
+      };
+
+      commit("setUser", user);
+    },
   },
+  getters: {},
   modules: {
-  }
-})
+    Vouchers,
+  },
+});
