@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "@/router";
 import Vouchers from "./Vouchers";
 
 Vue.use(Vuex);
@@ -27,12 +28,14 @@ export default new Vuex.Store({
         email: email,
         password: password,
       };
+
       commit("setUser", user);
+      router.replace("/");
     },
     register({ commit }, { email, password, passwordVerify }) {
       commit("setError", null);
       commit("setLoading", true);
-      if (password === passwordVerify) {
+      if (password !== passwordVerify) {
         commit("setError", "Lösenordet stämmer inte");
         commit("setLoading", false);
         return;
@@ -44,9 +47,24 @@ export default new Vuex.Store({
       };
 
       commit("setUser", user);
+      router.replace("/");
+    },
+    logout({ commit }) {
+      commit("setUser", null);
+      router.replace("/login");
     },
   },
-  getters: {},
+  getters: {
+    getUser: (state) => {
+      return state.user;
+    },
+    getLoading: (state) => {
+      return state.loading;
+    },
+    getError: (state) => {
+      return state.error;
+    },
+  },
   modules: {
     Vouchers,
   },
