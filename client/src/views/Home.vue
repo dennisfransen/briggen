@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     notAbleToGetFreeLunch() {
-      return this.number < 10;
+      return this.number < 9;
     }
   },
   methods: {
