@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Headery />
-    <v-content>
+    <v-content class="my-bg">
       <router-view/>
     </v-content>
   </v-app>
@@ -19,6 +19,12 @@ export default {
 </script>
 
 <style scoped>
+.my-bg {
+  background-image: url("./assets/grass.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
 .secondary-bg {
   background-color: #272727;
 }

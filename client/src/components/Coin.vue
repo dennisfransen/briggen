@@ -55,7 +55,8 @@ export default {
   width: 30px;
   line-height: 30px;
   text-align: center;
-  background-color: #82B1FF;
+  /* background-color: #82B1FF; */
+  background-color: #4CAF50;
   color: white;
   border-radius: 15px;
 }

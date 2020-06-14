@@ -1,8 +1,8 @@
 <template>
-  <v-app-bar app flat color="white" height="64">
-    <!-- <v-btn icon>
-      <v-icon>mdi-bell</v-icon>
-    </v-btn> -->
+  <v-app-bar app flat color="transparent" height="64">
+    <v-btn icon>
+      <v-icon>mdi-account</v-icon>
+    </v-btn>
 
     <v-spacer></v-spacer>
 
@@ -15,16 +15,13 @@
 
     <v-spacer></v-spacer>
 
-    <!-- <v-app-bar-nav-icon @click="drawer = !drawer" /> -->
+    <v-app-bar-nav-icon @click="drawer = !drawer" />
   </v-app-bar>
 </template>
 
 <script>
 export default {
   name: "Header",
-  data: () => ({
-    drawer: false,
-  }),
 };
 </script>
 
