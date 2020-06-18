@@ -135,6 +135,14 @@ class AuthController extends Controller
         return app()->handle(Request::create(route("login.google.redirect"), "GET"));
     }
 
+    public function view(User $user)
+    {
+        // TODO Implement policy
+        //        $this->authorize('view', $user);
+
+        return PrettyResponse::wrap(new UserCompleteResource($user));
+    }
+
     // TODO Feature test
     public function register(RegisterRequest $request): JsonResponse
     {

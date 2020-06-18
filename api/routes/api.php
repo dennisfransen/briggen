@@ -45,6 +45,8 @@ Route::prefix("v1")->group(
 
         Route::middleware(["auth:api"])->group(
             function () {
+                Route::get('/users/{user}', 'AuthController@view')->name('users.view');
+
                 Route::post(
                     "/logout",
                     "AuthController@logout"

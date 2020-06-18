@@ -2,18 +2,33 @@ import Vue from "vue";
 import Vuex from "vuex";
 import router from "@/router";
 import Vouchers from "./Vouchers";
+import AuthenticationService from "../services/AuthenticationService";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  plugins: [
+    createPersistedState({
+      paths: [
+        "user",
+        "token"
+      ]
+    })
+  ],
+  strict: true,
   state: {
     user: null,
     loading: false,
     error: null,
+    token: null,
   },
   mutations: {
     setUser(state, payload) {
       state.user = payload;
+    },
+    setToken(state, payload) {
+      state.token = payload;
     },
     setLoading(state, payload) {
       state.loading = payload;
@@ -23,36 +38,52 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({ commit }, { email, password }) {
-      const user = {
-        email: email,
-        password: password,
-      };
-
-      commit("setUser", user);
-      router.replace("/");
-    },
-    register({ commit }, { email, password, passwordVerify }) {
+    login({commit}, {form}) {
       commit("setError", null);
       commit("setLoading", true);
-      if (password !== passwordVerify) {
-        commit("setError", "Lösenordet stämmer inte");
-        commit("setLoading", false);
-        return;
-      }
 
-      const user = {
-        email: email,
-        password: password,
-      };
+      AuthenticationService.login(form)
+        .then(response => {
+          commit("setToken", response.data.data.access_token);
+          commit("setUser", response.data.data.user);
 
-      commit("setUser", user);
-      router.replace("/");
+          router.replace("/");
+        })
+        .catch(() => {
+          commit("setError", "Lösenordet stämmer inte");
+        })
+        .finally(() => {
+          commit("setLoading", false);
+        });
     },
-    logout({ commit }) {
+    register({commit}, {form}) {
+      commit("setError", null);
+      commit("setLoading", true);
+
+      AuthenticationService.register(form)
+        .then(response => {
+          commit("setToken", response.data.data.access_token);
+          commit("setUser", response.data.data.user);
+
+          router.replace("/");
+        })
+        .catch(() => {
+          commit("setError", "Lösenordet stämmer inte");
+        })
+        .finally(() => {
+          commit("setLoading", false);
+        });
+    },
+    logout({commit}) {
       commit("setUser", null);
       router.replace("/login");
     },
+    setUser({commit}, user) {
+      commit("setUser", user);
+    },
+    setToken({commit}, token) {
+      commit("setToken", token);
+    }
   },
   getters: {
     getUser: (state) => {

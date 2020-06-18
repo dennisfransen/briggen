@@ -7,8 +7,14 @@
         </h1>
       </v-card-text>
       <v-card-text>
-        <v-text-field solo type="email" label="E-post" v-model="email" clearable></v-text-field>
-        <v-text-field solo type="password" label="Lösenord" v-model="password" clearable></v-text-field>
+        <v-btn class="elevation-3 mx-4 mb-10 primary" dark fab icon
+               href="https://api.disevent.se/login/0">
+          <v-icon size="32">mdi-facebook</v-icon>
+        </v-btn>
+      </v-card-text>
+      <v-card-text>
+        <v-text-field solo type="email" label="E-post" v-model="form.email" clearable></v-text-field>
+        <v-text-field solo type="password" label="Lösenord" v-model="form.password" clearable></v-text-field>
         <router-link class="forgot-password" to="/forgot-password">
           <p class="body-2 text-end">Glömt lösenordet?</p>
         </router-link>
@@ -35,8 +41,10 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Login",
   data: () => ({
-    email: "",
-    password: "",
+    form: {
+      email: null,
+      password: null
+    }
   }),
   computed: {
     ...mapGetters(["getLoading", "getError"]),
@@ -44,10 +52,7 @@ export default {
   methods: {
     ...mapActions(["login"]),
     onLoginPressed() {
-      this.login({
-        email: this.email,
-        password: this.password,
-      });
+      this.login(this.form);
     },
   },
 };

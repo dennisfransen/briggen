@@ -4,6 +4,7 @@ import AuthGuard from "./authGuard";
 import Home from "@/views/Home";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
+import LoginFacebookCallback from "@/components/auth/LoginFacebookCallback";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [
     name: "Register",
     component: Register,
   },
+  {
+    path: '/login/facebook/callback/:userId/:userType/:accessToken',
+    name: 'loginFacebookCallback',
+    component: LoginFacebookCallback,
+  }
 ];
 
 const router = new VueRouter({
