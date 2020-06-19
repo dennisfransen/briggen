@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserCompleteResource;
+use App\Models\Corporation;
 use App\Models\LinkedSocialAccount;
+use App\Models\Stamp;
 use App\Models\User;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 use Fasberg\PrettyResponse\Facade\PrettyResponseFacade;
 use Fasberg\PrettyResponse\Facade\PrettyResponseFacade as PrettyResponse;
@@ -77,10 +80,7 @@ class AuthController extends Controller
         }
 
         if (!$user) {
-            if ($user = User::create([
-                "email" => $socialiteUser->email,
-                "name" => $socialiteUser->name,
-            ])) {
+            if ($user = $this->createUser($socialiteUser->name, $socialiteUser->email)) {
                 LinkedSocialAccount::create([
                     "provider_id" => $socialiteUser->id,
                     "provider_name" => $providerName,
@@ -146,11 +146,7 @@ class AuthController extends Controller
     // TODO Feature test
     public function register(RegisterRequest $request): JsonResponse
     {
-        $user = User::create([
-            "name" => $request->name,
-            "email" => $request->email,
-            "password" => Hash::make($request->password),
-        ]);
+        $user = $this->createUser($request->name, $request->email, $request->password);
 
         if (!$client = $this->getClient()) {
             return $this->getOAuthClientNotFound();
@@ -159,6 +155,25 @@ class AuthController extends Controller
         $data = $this->getCredentials($client, ["username" => $request->email, "password" => $request->password]);
 
         return $this->getTokenResponse($data, 201);
+    }
+
+    private function createUser(string $name, string $email, string $password = null)
+    {
+        $user = User::create([
+            "name" => $name,
+            "email" => $email,
+            "password" => $password ? Hash::make($password) : null,
+        ]);
+
+        if ($user) {
+            $stamp = new Stamp();
+            $stamp->user_id = $user->id;
+            $stamp->corporation_id = Corporation::first()->id;
+            $stamp->count = 0;
+            $stamp->save();
+        }
+
+        return $user;
     }
 
     // TODO Feature test

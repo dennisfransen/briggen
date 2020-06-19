@@ -7,10 +7,14 @@ export default {
     coins: 0,
     loading: false,
     error: null,
+    stamp: {
+      id: null,
+      count: null
+    }
   },
   mutations: {
-    setCoins(state, payload) {
-      state.coins = payload;
+    setStamp(state, payload) {
+      state.stamp = payload;
     },
     setLoading(state, payload) {
       state.loading = payload;
@@ -25,8 +29,8 @@ export default {
       commit("setLoading", true);
       VoucherService.consume(submitCode)
         .then((response) => {
-          commit("setCoins", response.data.data.count);
-          dispatch("fetchStamCount");
+          commit("setStamp", response.data.data);
+          dispatch("fetchStampCount");
           commit("setLoading", false);
         })
         .catch((err) => {
@@ -37,12 +41,12 @@ export default {
           submitCode = "";
         });
     },
-    async fetchStampCount({ commit }) {
+    async fetchStampCount({ commit, rootGetters }) {
       commit("setError", null);
       commit("setLoading", true);
-      await StampService.show()
+      await StampService.showFirstByUser(rootGetters.getUser.id)
         .then((response) => {
-          commit("setCoins", response.data.data.count);
+          commit("setStamp", response.data.data);
           commit("setLoading", false);
         })
         .catch((err) => {
@@ -53,7 +57,10 @@ export default {
   },
   getters: {
     getCoins: (state) => {
-      return state.coins;
+      return state.stamp.count ? Number(state.stamp.count) : 0;
+    },
+    getStampId: (state) => {
+      return state.stamp.id ?? null;
     },
     getLoading: (state) => {
       return state.loading;

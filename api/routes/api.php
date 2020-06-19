@@ -32,20 +32,22 @@ Route::prefix("v1")->group(
                 )->name("login.facebook");
 
                 Route::resource("corporations", "CorporationController")->only(["store", "show", "update"]);
-
-                Route::resource("stamps", "StampController")->only(["show"]);
-                Route::put("/stamps/{stamp}/consume", "StampController@consume")
-                    ->name("stamps.consume");
-
-                Route::resource("vouchers", "VoucherController")->only(["store"]);
-                Route::put("/vouchers/consume", "VoucherController@consume")
-                    ->name("vouchers.consume");
             }
         );
 
         Route::middleware(["auth:api"])->group(
             function () {
                 Route::get('/users/{user}', 'AuthController@view')->name('users.view');
+
+                Route::resource("stamps", "StampController")->only(["show"]);
+                Route::get("/stamps/first_by_user/{user}", "StampController@showFirstByUser")
+                    ->name("stamps.show_first_by_user");
+                Route::put("/stamps/{stamp}/consume", "StampController@consume")
+                    ->name("stamps.consume");
+
+                Route::resource("vouchers", "VoucherController")->only(["store"]);
+                Route::put("/vouchers/consume", "VoucherController@consume")
+                    ->name("vouchers.consume");
 
                 Route::post(
                     "/logout",

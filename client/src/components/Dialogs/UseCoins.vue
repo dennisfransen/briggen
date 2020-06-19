@@ -23,6 +23,7 @@
 
 <script>
   import StampService from "../../services/StampService";
+  import { mapGetters } from "vuex";
 
   export default {
     name: "UseCoins",
@@ -30,12 +31,14 @@
       dialog: Boolean,
     },
     methods: {
+      ...mapGetters("Vouchers", ["getStampId"]),
+
       closeDialog() {
         this.$emit("closeDialog", false);
       },
 
       consumeCoins() {
-        StampService.consume(9)
+        StampService.consume(10, this.getStampId())
           .then(() => {
             this.$emit("consumed", false);
             this.closeDialog();

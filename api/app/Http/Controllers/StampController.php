@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stamp;
+use App\Models\User;
 use Fasberg\PrettyResponse\Facade\PrettyResponseFacade;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,11 @@ class StampController extends Controller
     public function show(Stamp $stamp)
     {
         return PrettyResponseFacade::wrap($stamp->toArray());
+    }
+
+    public function showFirstByUser(User $user)
+    {
+        return PrettyResponseFacade::wrap($user->stamps[0]->toArray());
     }
 
     public function consume(Stamp $stamp, Request $request)

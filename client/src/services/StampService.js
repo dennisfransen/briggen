@@ -6,8 +6,11 @@ export default {
   show() {
     return Api().get(`${controller}/1`);
   },
-  consume(count) {
-    return Api().put(`${controller}/1/consume`, {
+  showFirstByUser(userId) {
+    return Api().get(`${controller}/first_by_user/${userId}`);
+  },
+  consume(count, stampId) {
+    return Api().put(`${controller}/${stampId}/consume`, {
       count: count
     });
   }

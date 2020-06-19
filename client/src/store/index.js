@@ -38,7 +38,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({commit}, {form}) {
+    login({commit}, form) {
       commit("setError", null);
       commit("setLoading", true);
 
@@ -56,7 +56,7 @@ export default new Vuex.Store({
           commit("setLoading", false);
         });
     },
-    register({commit}, {form}) {
+    register({commit}, form) {
       commit("setError", null);
       commit("setLoading", true);
 
@@ -76,6 +76,7 @@ export default new Vuex.Store({
     },
     logout({commit}) {
       commit("setUser", null);
+      commit("setToken", null);
       router.replace("/login");
     },
     setUser({commit}, user) {
