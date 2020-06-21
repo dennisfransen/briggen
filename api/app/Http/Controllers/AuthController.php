@@ -157,7 +157,7 @@ class AuthController extends Controller
         return $this->getTokenResponse($data, 201);
     }
 
-    private function createUser(string $name, string $email, string $password = null)
+    private function createUser(string $name, ?string $email, string $password = null)
     {
         $user = User::create([
             "name" => $name,
