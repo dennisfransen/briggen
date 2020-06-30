@@ -1,16 +1,10 @@
 <template>
   <v-container fill-height>
-    <v-card class="mx-auto py-6" flat width="800">
+    <v-card class="mx-auto py-6" flat width="600">
       <v-card-text>
         <h1 class="text-center font-weight-light login-presentation">
           Missa inte gratis lunch!
         </h1>
-      </v-card-text>
-      <v-card-text>
-        <v-btn class="elevation-3 mx-4 mb-10 primary" dark fab icon
-               href="https://api.disevent.se/login/0">
-          <v-icon size="32">mdi-facebook</v-icon>
-        </v-btn>
       </v-card-text>
       <v-card-text>
         <v-text-field solo type="email" label="E-post" v-model="form.email" clearable></v-text-field>
@@ -20,7 +14,13 @@
         </router-link>
       </v-card-text>
       <v-card-actions class="px-4">
-        <v-btn block height="48" x-large color="accent" :loading="getLoading" @click="onLoginPressed" >Logga in</v-btn>
+        <v-btn block height="48" x-large color="accent" :loading="getLoading" @click="onLoginPressed">Logga in</v-btn>
+      </v-card-actions>
+      <v-card-actions class="px-4">
+         <v-btn block height="48" x-large color="primary" href="https://api.disevent.se/login/0">
+          <v-icon left>mdi-facebook</v-icon>
+          Logga in med Facebook
+        </v-btn>
       </v-card-actions>
       <v-card-text>
         <div class="py-6"></div>

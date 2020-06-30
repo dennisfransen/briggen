@@ -1,34 +1,55 @@
 <template>
-  <v-container fill-height>
-    <Coin :number="getCoins" />
-    <v-card class="mx-auto" max-width="500" dark flat color="transparent">
-      <v-card-text>
-        <v-text-field light clearable label="Kod (hint: 12345)" solo rounded v-model="submitCode" @keyup.enter="consumeVoucher"></v-text-field>
-        <v-btn block class="py-6 mb-6" color="accent" rounded @click="consumeVoucher">Samla myntet</v-btn>
-        <v-btn block class="py-6" color="success" rounded @click="openDialog" v-if="!notAbleToGetFreeLunch">Klicka för Gratis lunch</v-btn>
-        <div class="py-6"></div>
-        <p class="body-1 mx-2 text-center">
-          Med hjälp av denna app kan du få gratis lunch.
-          Skriv in koden som står på disken och klicka på "samla myntet".
-          Samla på dig 10 mynt som du kan använda när du vill.
-        </p>
-      </v-card-text>
+  <v-container class="px-6">
+    <TopSection />
+    <div class="py-3"></div>
+    <CreditCard :balance="getCoins" />
+    <v-text-field
+      class="mt-12"
+      light
+      label="Kod"
+      solo
+      v-model="submitCode"
+      @keyup.enter="consumeVoucher"
+    >
+    </v-text-field>
+    <v-btn block class="py-6 mb-6" dark color="orange" @click="consumeVoucher">
+      Hämta myntet
+    </v-btn>
+    <v-btn
+      block
+      class="py-6"
+      color="success"
+      @click="openDialog"
+      :disabled="notAbleToGetFreeLunch"
+    >
+      Klicka för Gratis lunch
+    </v-btn>
+    <div class="py-4"></div>
+    <p class="body-1 mx-2 text-center">
+      Med hjälp av denna app kan du få gratis lunch. Skriv in koden som står på
+      disken och klicka på "samla myntet". Samla på dig 10 mynt som du kan
+      använda när du vill.
+    </p>
 
-      <v-alert class="text-center" dismissible v-if="getError" type="error">
-        {{ getError }}
-      </v-alert>
-    </v-card>
+    <v-alert class="text-center" dismissible v-if="getError" type="error">
+      {{ getError }}
+    </v-alert>
 
     <v-dialog v-model="dialog" width="500">
-      <UseCoins :dialog="dialog" @closeDialog="closeDialog" @consumed="fetchStampCount"/>
+      <UseCoins
+        :dialog="dialog"
+        @closeDialog="closeDialog"
+        @consumed="fetchStampCount"
+      />
     </v-dialog>
   </v-container>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import Coin from "@/components/Coin";
 import UseCoins from "@/components/Dialogs/UseCoins";
+import TopSection from "@/components/TopSection";
+import CreditCard from "@/components/CreditCard";
 
 export default {
   name: "Home",
@@ -58,11 +79,15 @@ export default {
     },
     closeDialog(value) {
       this.dialog = value;
-    }
+    },
+    goToProfile() {
+      this.$router.replace("/");
+    },
   },
   components: {
-    Coin,
     UseCoins,
+    CreditCard,
+    TopSection,
   },
 };
 </script>
