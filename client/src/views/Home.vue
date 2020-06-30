@@ -1,7 +1,7 @@
 <template>
   <v-container class="px-6">
-    <TopSection />
-    <div class="py-3"></div>
+    <!-- <TopSection /> -->
+    <div class="py-2"></div>
     <CreditCard :balance="getCoins" />
     <v-text-field
       class="mt-12"
@@ -10,20 +10,15 @@
       solo
       v-model="submitCode"
       @keyup.enter="consumeVoucher"
-    >
-    </v-text-field>
-    <v-btn block class="py-6 mb-6" dark color="orange" @click="consumeVoucher">
-      Hämta myntet
-    </v-btn>
+    ></v-text-field>
+    <v-btn block class="py-6 mb-6" dark color="orange" @click="consumeVoucher">Hämta myntet</v-btn>
     <v-btn
       block
       class="py-6"
       color="success"
       @click="openDialog"
       :disabled="notAbleToGetFreeLunch"
-    >
-      Klicka för Gratis lunch
-    </v-btn>
+    >Klicka för Gratis lunch</v-btn>
     <div class="py-4"></div>
     <p class="body-1 mx-2 text-center">
       Med hjälp av denna app kan du få gratis lunch. Skriv in koden som står på
@@ -31,16 +26,10 @@
       använda när du vill.
     </p>
 
-    <v-alert class="text-center" dismissible v-if="getError" type="error">
-      {{ getError }}
-    </v-alert>
+    <v-alert class="text-center" dismissible v-if="getError" type="error">{{ getError }}</v-alert>
 
     <v-dialog v-model="dialog" width="500">
-      <UseCoins
-        :dialog="dialog"
-        @closeDialog="closeDialog"
-        @consumed="fetchStampCount"
-      />
+      <UseCoins :dialog="dialog" @closeDialog="closeDialog" @consumed="fetchStampCount" />
     </v-dialog>
   </v-container>
 </template>
@@ -48,7 +37,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import UseCoins from "@/components/Dialogs/UseCoins";
-import TopSection from "@/components/TopSection";
+import TopSection from "@/components/TopSection"; //eslint-disable-line
 import CreditCard from "@/components/CreditCard";
 
 export default {
@@ -56,7 +45,7 @@ export default {
   data: () => ({
     submitCode: "",
     code: "abc",
-    dialog: false,
+    dialog: false
   }),
   created() {
     this.fetchStampCount();
@@ -65,7 +54,7 @@ export default {
     ...mapGetters("Vouchers", ["getCoins", "getLoading", "getError"]),
     notAbleToGetFreeLunch() {
       return this.getCoins < 10;
-    },
+    }
   },
   methods: {
     ...mapActions("Vouchers", ["consume", "fetchStampCount"]),
@@ -82,12 +71,12 @@ export default {
     },
     goToProfile() {
       this.$router.replace("/");
-    },
+    }
   },
   components: {
     UseCoins,
     CreditCard,
-    TopSection,
-  },
+    TopSection//eslint-disable-line
+  }
 };
 </script>

@@ -1,9 +1,10 @@
 <template>
-  <v-container fill-height>
+  <v-container fill-height fluid>
     <v-card class="mx-auto py-6" flat width="600">
       <v-card-text>
-        <h1 class="text-center font-weight-light login-presentation">
-          Missa inte gratis lunch!
+        <h1 class="text-center login-presentation">
+          <span class="secondary--text font-weight-bold">DIS</span>
+          <span class="secondary--text font-weight-light">EVENT</span>
         </h1>
       </v-card-text>
       <v-card-text>
@@ -14,7 +15,7 @@
         </router-link>
       </v-card-text>
       <v-card-actions class="px-4">
-        <v-btn block height="48" x-large color="accent" :loading="getLoading" @click="onLoginPressed">Logga in</v-btn>
+        <v-btn block dark height="48" x-large color="orange" :loading="getLoading" @click="onLoginPressed">Logga in</v-btn>
       </v-card-actions>
       <v-card-actions class="px-4">
          <v-btn block height="48" x-large color="primary" href="https://api.disevent.se/login/0">
@@ -69,5 +70,11 @@ export default {
 
 .no-account {
   text-decoration: none;
+}
+
+.my-bg {
+  background-image: url("../assets/food.jpeg");
+  background-position: center;
+  background-size: cover;
 }
 </style>

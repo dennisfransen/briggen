@@ -1,9 +1,12 @@
 <template>
   <div>
     <v-app-bar app flat color="transparent" height="64">
-      <v-btn icon v-if="getUser">
+      <!-- <v-btn icon v-if="getUser">
         <v-icon>mdi-account</v-icon>
-      </v-btn>
+      </v-btn> -->
+      <v-avatar size="36">
+          <v-img src="../../assets/avatar.png"></v-img>
+      </v-avatar>
       <v-spacer></v-spacer>
       <v-toolbar-title>
         <router-link to="/" class="app-title">
@@ -12,10 +15,10 @@
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-app-bar-nav-icon v-if="getUser" @click="drawer = !drawer" />
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
     </v-app-bar>
 
-    <v-navigation-drawer app v-model="drawer" temporary right width="100%">
+    <v-navigation-drawer app v-model="drawer" temporary right>
       <v-list>
         <!-- <v-list-item-group v-model="item" color="primary">
           <v-list-item v-for="(item, i) in items" :key="i" :to="item.link">
