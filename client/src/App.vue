@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <Headery v-if="getUser" />
-    <v-content>
+    <Headery @searchPressed="searchPressed" />
+    <v-content :class="search ? 'pa-0' : null">
       <router-view />
     </v-content>
   </v-app>
@@ -9,27 +9,19 @@
 
 <script>
 import Headery from "@/components/templates/Header";
-import { mapGetters } from "vuex";
 
 export default {
   name: "App",
-  computed: {
-    ...mapGetters(["getUser"])
+  data: () => ({
+    search: false,
+  }),
+  methods: {
+    searchPressed(search) {
+      this.search = search;
+    }
   },
   components: {
     Headery
   }
 };
 </script>
-
-<style scoped>
-/* .my-bg {
-  background-image: url("./assets/grass.jpg");
-  background-position: center;
-  background-size: cover;
-}
-
-.secondary-bg {
-  background-color: #272727;
-} */
-</style>

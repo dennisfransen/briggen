@@ -1,5 +1,6 @@
 <template>
   <v-sheet>
+    <h3>Trender</h3>
     <v-slide-group v-model="model" center-active active-class="success">
       <v-slide-item v-for="n in 4" :key="n" v-slot:default="{ active, toggle }">
         <v-card

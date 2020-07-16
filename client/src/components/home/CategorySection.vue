@@ -1,6 +1,6 @@
 <template>
   <v-sheet>
-    <h3>Kategori</h3>
+    <h3>Kategorier</h3>
     <v-slide-group v-model="model" center-active>
       <v-slide-item v-for="n in 4" :key="n" v-slot:default="{ active, toggle }">
         <v-sheet>

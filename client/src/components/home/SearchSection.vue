@@ -1,5 +1,7 @@
 <template>
   <v-sheet class="px-4" color="primary" tile>
+    <v-sheet height="48"> 
+    </v-sheet>
     <v-row align="center">
       <v-col cols="6">
         <h2 class="title white--text">Restauranger</h2>
