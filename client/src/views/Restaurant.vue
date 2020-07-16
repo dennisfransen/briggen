@@ -15,12 +15,7 @@
               <span class="body-2 white--text">inom 2km</span>
             </v-col>
             <v-col cols="6" class="text-end">
-              <v-icon color="yellow">mdi-star</v-icon>
-              <v-icon color="yellow">mdi-star</v-icon>
-              <v-icon color="yellow">mdi-star</v-icon>
-              <v-icon color="yellow">mdi-star</v-icon>
-              <v-icon color="grey">mdi-star</v-icon>
-              <span class="body-2 white--text font-weight-bold">4.5</span>
+              <StarRating class="mr-4" v-model="restaurant.rating" font-size="subtitle-1" justify="end" font-color="white--text"/>
             </v-col>
           </v-row>
         </v-container>
@@ -39,7 +34,7 @@
       <v-container>
         <div v-for="(category, index) in categories" :key="index">
           <h4 class="overline py-4">{{ category.category }}</h4>
-          <ProductCard v-for="product in category.products" :key="product.id" :product="product" class="mb-2"/>
+          <ProductCard v-for="product in category.products" :key="product.id" :product="product" />
         </div>
       </v-container>
     </v-sheet>
@@ -48,6 +43,7 @@
 </template>
 
 <script>
+import StarRating from "@/components/core/StarRating";
 import ProductCard from "@/components/restaurant/ProductCard";
 
 export default {
@@ -56,25 +52,26 @@ export default {
     restaurant: {
       title: "Restaurang Briggen",
       description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos temporibus dicta quas doloribus molestias reiciendis aut, similique incidunt excepturi vero iste facere modi magnam veritatis neque ut architecto porro impedit, voluptas quos deleniti commodi, dolor quamaliquid. Magni, a eos!",
+        "Lorem ipsum dolor sitamet consectetur adipisicing elit. Dignissimos temporibus dicta quas doloribus molestias reiciendis aut, similique incidunt excepturi vero iste facere modi magnam veritatis neque ut architecto porro impedit, voluptas quos deleniti commodi, dolor quamaliquid. Magni, a eos!",
+      rating: 4,
     },
     categories: [
       {
         id: 0,
         category: "Huvudrätter",
         products: [
-          { id: 0, categoryId: 0, title: "Spaghetti Bolognese", price: "95" },
-          { id: 1, categoryId: 0, title: "Spetta med Citronsås", price: "89" },
-          { id: 2, categoryId: 0, title: "Oxfilé med klyftpotatis och sås", price: "120" },
+          { id: 0, categoryId: 0, title: "Spaghetti Bolognese", price: 95, rating: 3 },
+          { id: 1, categoryId: 0, title: "Spetta med Citronsås", price: 89, rating: 4 },
+          { id: 2, categoryId: 0, title: "Oxfilé med klyftpotatis och sås", price: 120, rating: 1 },
         ],
       },
       {
         id: 1,
         category: "Efterrätter",
         products: [
-          { id: 3, categoryId: 1, title: "Kladdkaka med grädde", price: "110" },
-          { id: 4, categoryId: 1, title: "Rabarberpaj", price: "85" },
-          { id: 5, categoryId: 1, title: "Maräng med colaglass", price: "180" },
+          { id: 3, categoryId: 1, title: "Kladdkaka med grädde", price: 110, rating: 5 },
+          { id: 4, categoryId: 1, title: "Rabarberpaj", price: 85, rating: 3 },
+          { id: 5, categoryId: 1, title: "Maräng med colaglass", price: 180, rating: 2 },
         ],
       },
     ],
@@ -85,6 +82,7 @@ export default {
     },
   },
   components: {
+    StarRating,
     ProductCard,
   },
 };

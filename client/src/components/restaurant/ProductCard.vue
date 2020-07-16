@@ -1,39 +1,45 @@
 <template>
-  <v-card class="product-card">
-    <v-container fill-height py-0>
-      <v-row align="center">
-        <v-col cols="10" class="py-2">
-          <v-row align="center" no-gutters>
-            <v-col cols="auto" class="mr-3">
-              <v-img height="64" width="64" src="@/assets/plate2.jpg"></v-img>
+  <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+    <template v-slot:activator="{ on, attrs }">
+      <v-card class="product-card mb-2" v-bind="attrs" v-on="on">
+        <v-container fill-height py-0>
+          <v-row align="center">
+            <v-col cols="10" class="py-2">
+              <v-row align="center" no-gutters>
+                <v-col cols="auto" class="mr-3">
+                  <v-img height="64" width="64" src="@/assets/plate2.jpg"></v-img>
+                </v-col>
+                <v-col cols="8">
+                  <div style="max-width: 100%">
+                    <h4 class="subtitle-2 product-title">{{ product.title }}</h4>
+                  </div>
+                  <p class="caption green--text mb-0 mt-1">{{ product.price.toFixed(2) }} SEK</p>
+                  <StarRating v-model="product.rating" icon-size="15" font-size="caption" small/>
+                </v-col>
+              </v-row>
             </v-col>
-            <v-col cols="8">
-              <div style="max-width: 100%">
-                <h4 class="subtitle-2 product-title">{{ product.title }}</h4>
+            <v-col cols="2" class="text-end py-1">
+              <v-btn icon x-small class="grey" color="white" @click.stop="increaseProductCount">
+                <v-icon small>mdi-plus</v-icon>
+              </v-btn>
+              <div class="mt-1 ml-auto product-count text-center">
+                {{ productCount }}
               </div>
-              <p class="caption green--text mb-0 mt-1">{{ product.price }}.00 SEK</p>
-              <StarRating v-model="starValue" icon-size="15" font-size="caption"/>
+              <v-btn icon x-small class="grey" color="white" @click.stop="decreaseProductCount">
+                <v-icon small>mdi-minus</v-icon>
+              </v-btn>
             </v-col>
           </v-row>
-        </v-col>
-        <v-col cols="2" class="text-end py-1">
-          <v-btn icon x-small class="grey" color="white" @click="increaseProductCount">
-            <v-icon small>mdi-plus</v-icon>
-          </v-btn>
-          <div class="mt-1 ml-auto product-count text-center">
-            {{ productCount }}
-          </div>
-          <v-btn icon x-small class="grey" color="white" @click="decreaseProductCount">
-            <v-icon small>mdi-minus</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-card>
+        </v-container>
+      </v-card>
+    </template>
+    <ProductInfoDialog v-model="dialog" :product="product" />
+  </v-dialog>
 </template>
 
 <script>
 import StarRating from "@/components/core/StarRating";
+import ProductInfoDialog from "@/components/restaurant/ProductInfoDialog"
 
 export default {
   name: "ProductCard",
@@ -42,7 +48,7 @@ export default {
   },
   data: () => ({
     productCount: 0,
-    starValue: "4.5",
+    dialog: false,
   }),
   methods: {
     increaseProductCount() {
@@ -55,6 +61,7 @@ export default {
   },
   components: {
     StarRating,
+    ProductInfoDialog,
   },
 };
 </script>
