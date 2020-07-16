@@ -1,10 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 // import AuthGuard from "./authGuard";
+import LoginFacebookCallback from "@/components/auth/LoginFacebookCallback";
 import Home from "@/views/Home";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
-import LoginFacebookCallback from "@/components/auth/LoginFacebookCallback";
+import Restaurant from "@/views/Restaurant";
 
 Vue.use(VueRouter);
 
@@ -26,10 +27,15 @@ const routes = [
     component: Register,
   },
   {
-    path: '/login/facebook/callback/:userId/:userType/:accessToken',
-    name: 'loginFacebookCallback',
+    path: "/restaurant/:id",
+    name: "Restaurant",
+    component: Restaurant,
+  },
+  {
+    path: "/login/facebook/callback/:userId/:userType/:accessToken",
+    name: "loginFacebookCallback",
     component: LoginFacebookCallback,
-  }
+  },
 ];
 
 const router = new VueRouter({

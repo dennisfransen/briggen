@@ -1,5 +1,5 @@
 <template>
-  <v-sheet class="px-4" color="primary" tile>
+  <v-sheet class="px-4" color="grey" tile>
     <v-sheet height="48"> 
     </v-sheet>
     <v-row align="center">
