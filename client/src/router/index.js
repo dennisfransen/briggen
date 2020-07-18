@@ -6,6 +6,7 @@ import Home from "@/views/Home";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
 import Restaurant from "@/views/Restaurant";
+import Admin from "@/views/Admin";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
     path: "/restaurant/:id",
     name: "Restaurant",
     component: Restaurant,
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: Admin,
   },
   {
     path: "/login/facebook/callback/:userId/:userType/:accessToken",
