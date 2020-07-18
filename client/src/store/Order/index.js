@@ -31,7 +31,8 @@ export default {
       const product = {
         id: payload.id,
         title: payload.title,
-        price: payload.price
+        price: payload.price,
+        typeId: payload.typeId,
       }
       commit("setProduct", product);
       commit("setLoading", false);
@@ -44,6 +45,14 @@ export default {
     }
   },
   getters: {
+    getTotalOrderDrinkItems: (state) => {
+      const drinkItems = state.order.filter(product => product.typeId === 1);
+      return drinkItems.length;
+    },
+    getTotalOrderFoodItems: (state) => {
+      const foodItems = state.order.filter(product => product.typeId === 0);
+      return foodItems.length;
+    },
     getTotalOrderItems: (state) => {
       return state.order.length;
     },
@@ -53,7 +62,7 @@ export default {
         totalPrice += product.price 
       });
 
-      return totalPrice;
-    }
+      return totalPrice.toFixed(2);
+    },
   },
 };

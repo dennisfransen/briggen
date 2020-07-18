@@ -45,16 +45,17 @@
 
 <script>
 import SearchSection from "@/components/home/SearchSection";
+
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Header",
   data: () => ({
     drawer: false,
-    search: false
+    search: false,
   }),
   computed: {
-    ...mapGetters(["getUser"])
+    ...mapGetters(["getUser"]),
   },
   methods: {
     ...mapActions(["logout"]),
@@ -64,7 +65,7 @@ export default {
     }
   },
   components: {
-    SearchSection
+    SearchSection,
   }
 };
 </script>

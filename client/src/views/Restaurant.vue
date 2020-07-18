@@ -38,7 +38,7 @@
         </div>
       </v-container>
     </v-sheet>
-    <v-sheet class="py-12" color="grey lighten-3"></v-sheet>
+    <v-sheet v-show="getTotalOrderItems" class="py-10" color="grey lighten-3"></v-sheet>
   </div>
 </template>
 
@@ -63,7 +63,10 @@ export default {
     ...mapGetters("Restaurant", [
       "getRestaurant", 
       "getCategoriesWithProducts"
-      ])
+    ]),
+    ...mapGetters("Order", [
+      "getTotalOrderItems", 
+    ])
   },
   methods: {
     ...mapActions("Restaurant", [

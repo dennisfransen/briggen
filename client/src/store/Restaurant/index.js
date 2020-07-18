@@ -46,18 +46,27 @@ export default {
             id: 0,
             category: "Huvudrätter",
             products: [
-              { id: 0, categoryId: 0, title: "Spaghetti Bolognese", price: 95, rating: 3 },
-              { id: 1, categoryId: 0, title: "Spetta med Citronsås", price: 89, rating: 4 },
-              { id: 2, categoryId: 0, title: "Oxfilé med klyftpotatis och sås", price: 120, rating: 1 },
+              { id: 0, categoryId: 0, typeId: 0, title: "Spaghetti Bolognese", price: 95, rating: 3 },
+              { id: 1, categoryId: 0, typeId: 0, title: "Spetta med Citronsås", price: 89, rating: 4 },
+              { id: 2, categoryId: 0, typeId: 0, title: "Oxfilé med klyftpotatis och sås", price: 120, rating: 1 },
             ],
           },
           {
             id: 1,
             category: "Efterrätter",
             products: [
-              { id: 3, categoryId: 1, title: "Kladdkaka med grädde", price: 110, rating: 5 },
-              { id: 4, categoryId: 1, title: "Rabarberpaj", price: 85, rating: 3 },
-              { id: 5, categoryId: 1, title: "Maräng med colaglass", price: 180, rating: 2 },
+              { id: 3, categoryId: 1, typeId: 0, title: "Kladdkaka med grädde", price: 110, rating: 5 },
+              { id: 4, categoryId: 1, typeId: 0, title: "Rabarberpaj", price: 85, rating: 3 },
+              { id: 5, categoryId: 1, typeId: 0, title: "Maräng med colaglass", price: 180, rating: 2 },
+            ],
+          },
+          {
+            id: 2,
+            category: "Dryck",
+            products: [
+              { id: 6, categoryId: 2, typeId: 1, title: "Coca-Cola Zero", price: 15, rating: 5 },
+              { id: 7, categoryId: 2, typeId: 1, title: "Coca-Cola", price: 15, rating: 5 },
+              { id: 8, categoryId: 2, typeId: 1, title: "Norrlands Guld 2.5%", price: 25, rating: 5 },
             ],
           },
         ];
