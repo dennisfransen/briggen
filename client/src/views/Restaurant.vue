@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="restaurant">
     <v-img src="@/assets/wineanddine.jpg" height="250">
       <v-btn class="px-0 white" min-width="36" absolute top left @click="onGoBackPressed">
         <v-icon color="secondary lighten-2">mdi-chevron-left</v-icon>
@@ -45,38 +45,31 @@
 <script>
 import StarRating from "@/components/core/StarRating";
 import ProductCard from "@/components/restaurant/ProductCard";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Restaurant",
+  mounted() {
+    this.fetchRestaurant();
+    this.fetchCategoriesWithProducts();
+    this.restaurant = this.getRestaurant;
+    this.categories = this.getCategoriesWithProducts
+  },
   data: () => ({
-    restaurant: {
-      title: "Restaurang Briggen",
-      description:
-        "Lorem ipsum dolor sitamet consectetur adipisicing elit. Dignissimos temporibus dicta quas doloribus molestias reiciendis aut, similique incidunt excepturi vero iste facere modi magnam veritatis neque ut architecto porro impedit, voluptas quos deleniti commodi, dolor quamaliquid. Magni, a eos!",
-      rating: 4,
-    },
-    categories: [
-      {
-        id: 0,
-        category: "Huvudrätter",
-        products: [
-          { id: 0, categoryId: 0, title: "Spaghetti Bolognese", price: 95, rating: 3 },
-          { id: 1, categoryId: 0, title: "Spetta med Citronsås", price: 89, rating: 4 },
-          { id: 2, categoryId: 0, title: "Oxfilé med klyftpotatis och sås", price: 120, rating: 1 },
-        ],
-      },
-      {
-        id: 1,
-        category: "Efterrätter",
-        products: [
-          { id: 3, categoryId: 1, title: "Kladdkaka med grädde", price: 110, rating: 5 },
-          { id: 4, categoryId: 1, title: "Rabarberpaj", price: 85, rating: 3 },
-          { id: 5, categoryId: 1, title: "Maräng med colaglass", price: 180, rating: 2 },
-        ],
-      },
-    ],
+    restaurant: null,
+    categories: null, 
   }),
+  computed: {
+    ...mapGetters("Restaurant", [
+      "getRestaurant", 
+      "getCategoriesWithProducts"
+      ])
+  },
   methods: {
+    ...mapActions("Restaurant", [
+      "fetchRestaurant",
+      "fetchCategoriesWithProducts",
+    ]),
     onGoBackPressed() {
       this.$router.go(-1);
     },

@@ -3,7 +3,7 @@
     <v-app-bar app dense flat hide-on-scroll>
       <v-toolbar-title>
         <router-link to="/" class="app-title">
-          <span class="secondary--text font-weight-light">siediti</span>
+          <h1 class="secondary--text font-weight-light">Siediti</h1>
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -72,5 +72,13 @@ export default {
 <style>
 .app-title {
   text-decoration: none;
+  font-family: 'Pacifico', cursive;
+  font-family: 'Damion', cursive;
+  font-size: 0.8rem;
 }
+
+h1 {
+  padding-right: .1em;
+}
+
 </style>

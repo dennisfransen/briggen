@@ -2,6 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 import router from "@/router";
 import Vouchers from "./Vouchers";
+import Order from "./Order";
+import Restaurant from "./Restaurant";
+import Categories from "./Categories";
 import AuthenticationService from "../services/AuthenticationService";
 import createPersistedState from "vuex-persistedstate";
 
@@ -99,5 +102,8 @@ export default new Vuex.Store({
   },
   modules: {
     Vouchers,
+    Order,
+    Restaurant,
+    Categories,
   },
 });

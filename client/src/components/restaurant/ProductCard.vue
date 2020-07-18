@@ -19,13 +19,13 @@
               </v-row>
             </v-col>
             <v-col cols="2" class="text-end py-1">
-              <v-btn icon x-small class="grey" color="white" @click.stop="increaseProductCount">
+              <v-btn icon x-small class="grey" color="white" @click.stop="increaseProductCount(product)">
                 <v-icon small>mdi-plus</v-icon>
               </v-btn>
               <div class="mt-1 ml-auto product-count text-center">
                 {{ productCount }}
               </div>
-              <v-btn icon x-small class="grey" color="white" @click.stop="decreaseProductCount">
+              <v-btn icon x-small class="grey" color="white" @click.stop="decreaseProductCount(product)">
                 <v-icon small>mdi-minus</v-icon>
               </v-btn>
             </v-col>
@@ -40,6 +40,7 @@
 <script>
 import StarRating from "@/components/core/StarRating";
 import ProductInfoDialog from "@/components/restaurant/ProductInfoDialog"
+import { mapActions } from "vuex";
 
 export default {
   name: "ProductCard",
@@ -51,11 +52,14 @@ export default {
     dialog: false,
   }),
   methods: {
-    increaseProductCount() {
+    ...mapActions("Order", ["addProductToOrder", "removeProductFromOrder"]),
+    increaseProductCount(product) {
       this.productCount++;
+      this.addProductToOrder(product)
     },
-    decreaseProductCount() {
+    decreaseProductCount(product) {
       if (this.productCount < 1) return;
+      this.removeProductFromOrder(product)
       this.productCount--;
     }
   },
