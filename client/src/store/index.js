@@ -5,6 +5,7 @@ import Vouchers from "./Vouchers";
 import Order from "./Order";
 import Restaurant from "./Restaurant";
 import Categories from "./Categories";
+import Featured from "./Featured";
 import AuthenticationService from "../services/AuthenticationService";
 import createPersistedState from "vuex-persistedstate";
 
@@ -105,5 +106,6 @@ export default new Vuex.Store({
     Order,
     Restaurant,
     Categories,
+    Featured,
   },
 });

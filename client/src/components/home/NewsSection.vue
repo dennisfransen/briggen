@@ -3,7 +3,7 @@
     <h3>Nyheter</h3>
     <v-carousel class="my-4" cycle height="260" hide-delimiters show-arrows-on-hover>
       <v-carousel-item v-for="restaurant in featuredRestaurants" :key="restaurant.id" @click="onFeaturedRestaurantPressed(restaurant.id)">
-        <v-card class="featured-restaurant">
+        <v-card class="border-10 m-left">
           <v-img :src="restaurant.imgUrl" height="150"></v-img>
             <v-container fill-height>
               <h4 class="title">{{ restaurant.title }}</h4>
@@ -47,7 +47,11 @@ export default {
 </script>
 
 <style scoped>
-.featured-restaurant {
+.border-10 {
   border-radius: 10px !important;
+}
+
+.m-left {
+  margin-left: 2px;
 }
 </style>
