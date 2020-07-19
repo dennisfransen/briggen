@@ -2,22 +2,12 @@
   <v-sheet>
     <h3>Kategorier</h3>
     <v-slide-group v-model="model" center-active>
-      <v-slide-item v-for="n in 4" :key="n" v-slot:default="{ active, toggle }">
+      <v-slide-item v-for="category in categories" :key="category.id" v-slot:default="{ active, toggle }">
         <v-sheet>
-          <v-card
-            :color="active ? 'success' : 'grey lighten-1'"
-            class="my-4 mr-4"
-            height="100"
-            width="100"
-            @click="toggle"
-          >
-            <v-row class="fill-height" align="center" justify="center">
-              <v-scale-transition>
-                <v-icon v-if="active" color="white" size="48" v-text="'mdi-close-circle-outline'"></v-icon>
-              </v-scale-transition>
-            </v-row>
+          <v-card class="my-4 mr-4 border-10 m-left" height="100" width="100" @click="toggle">
+              <v-img contain src="@/assets/plate2.jpg"></v-img>
           </v-card>
-          <p class="body-2 ma-0 text-center mr-4">Asiatiskt</p>
+          <p class="body-2 ma-0 text-center mr-4">{{ category.title }}</p>
         </v-sheet>
       </v-slide-item>
     </v-slide-group>
@@ -25,10 +15,42 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "FeaturedSection",
+  mounted() {
+    this.fetchCategories();
+    this.categories = this.getCategories;
+  },
   data: () => ({
+    categories: null,
     model: null
-  })
+  }),
+  computed: {
+    ...mapGetters("Categories", [
+      "getCategories"
+    ])
+  },
+  methods: {
+    ...mapActions("Categories", [
+      "fetchCategories"
+    ])
+  }
 };
 </script>
+
+<style scoped>
+.border-10 {
+  border-radius: 10px !important;
+}
+
+.m-left {
+  margin-left: 2px;
+}
+
+.v-card--link::before {
+  border-radius: 10px !important;
+}
+
+</style>
