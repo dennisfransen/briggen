@@ -7,6 +7,7 @@ import Login from "@/views/Login";
 import Register from "@/views/Register";
 import Restaurant from "@/views/Restaurant";
 import Admin from "@/views/Admin";
+import Ordered from "@/views/Ordered";
 
 Vue.use(VueRouter);
 
@@ -36,6 +37,11 @@ const routes = [
     path: "/admin",
     name: "Admin",
     component: Admin,
+  },
+  {
+    path: "/ordered",
+    name: "Ordered",
+    component: Ordered,
   },
   {
     path: "/login/facebook/callback/:userId/:userType/:accessToken",

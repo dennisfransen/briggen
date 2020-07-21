@@ -7,6 +7,12 @@
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn v-if="getHasOrdered" icon @click="onOrdersPressed">
+        <v-icon>mdi-cart-arrow-right</v-icon>
+      </v-btn>
+      <v-btn icon @click="onCurrentRestaurantPressed">
+        <v-icon>mdi-table-chair</v-icon>
+      </v-btn>
       <v-btn icon @click="onSearchPressed">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -53,18 +59,28 @@ export default {
   data: () => ({
     drawer: false,
     search: false,
+    item: null,
     items: [
       { icon: "mdi-apps", text: "Administrera", link: "/admin"}
     ]
   }),
   computed: {
     ...mapGetters(["getUser"]),
+    ...mapGetters("Order", [
+			"getHasOrdered"
+		]),
   },
   methods: {
     ...mapActions(["logout"]),
     onSearchPressed() {
       this.search = !this.search;
       this.$emit('searchPressed', this.search);
+    },
+    onCurrentRestaurantPressed(restaurantId) {
+      this.$router.push(`/restaurant/${restaurantId}`)
+    },
+    onOrdersPressed() {
+      this.$router.push("/ordered")
     }
   },
   components: {
