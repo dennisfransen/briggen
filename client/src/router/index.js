@@ -8,6 +8,7 @@ import Register from "@/views/Register";
 import Restaurant from "@/views/Restaurant";
 import Admin from "@/views/Admin";
 import Ordered from "@/views/Ordered";
+import Products from "@/views/my_restaurant/Products";
 
 Vue.use(VueRouter);
 
@@ -42,6 +43,11 @@ const routes = [
     path: "/ordered",
     name: "Ordered",
     component: Ordered,
+  },
+  {
+    path: "/products",
+    name: "Products",
+    component: Products,
   },
   {
     path: "/login/facebook/callback/:userId/:userType/:accessToken",

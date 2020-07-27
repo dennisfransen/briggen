@@ -61,7 +61,7 @@ export default {
     search: false,
     item: null,
     items: [
-      { icon: "mdi-apps", text: "Administrera", link: "/admin"}
+      { icon: "mdi-apps", text: "Min Restaurant", link: "/admin"}
     ]
   }),
   computed: {

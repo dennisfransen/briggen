@@ -11,7 +11,7 @@
                 </v-col>
                 <v-col cols="8">
                   <div style="max-width: 100%">
-                    <h4 class="subtitle-2 product-title">{{ product.title }}</h4>
+                    <h4 class="subtitle-2 product-title">{{ product.name }}</h4>
                   </div>
                   <p class="caption green--text mb-0 mt-1">{{ product.price.toFixed(2) }} SEK</p>
                   <StarRating v-model="product.rating" icon-size="15" font-size="caption" small/>

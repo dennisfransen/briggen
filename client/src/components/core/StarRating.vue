@@ -9,9 +9,10 @@
           readonly
           dense
           :small="small"
+          :size="iconSize"
         ></v-rating>
       </span>
-      <span :class="[fontSize, fontColor]" class="font-weight-bold mt-1 ml-1">{{ value.toFixed(1) }}</span>
+      <span :class="[fontSize, fontColor, fontWeight ? fontWeight : 'font-weight-bold']" class="mt-1 ml-1">{{ value.toFixed(1) }}</span>
     </v-row>
   </v-sheet>
 </template>
@@ -24,6 +25,8 @@ export default {
     small: String,
     fontSize: String,
     fontColor: String,
+    iconSize: String,
+    fontWeight: String,
     justify: {
       type: String,
       default: "start"
