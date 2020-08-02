@@ -53,7 +53,7 @@ export default {
       commit("setError", null);
       const product = {
         id: payload.id,
-        title: payload.title,
+        name: payload.name,
         price: payload.price,
         typeId: payload.typeId,
       }

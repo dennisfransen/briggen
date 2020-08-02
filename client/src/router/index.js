@@ -9,6 +9,7 @@ import Restaurant from "@/views/Restaurant";
 import Admin from "@/views/Admin";
 import Ordered from "@/views/Ordered";
 import Products from "@/views/my_restaurant/Products";
+import Restaurants from "@/views/Restaurants";
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const routes = [
     path: "/products",
     name: "Products",
     component: Products,
+  },
+  {
+    path: "/restaurants/:category_id",
+    name: "Restaurants",
+    component: Restaurants,
   },
   {
     path: "/login/facebook/callback/:userId/:userType/:accessToken",

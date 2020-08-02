@@ -4,7 +4,7 @@
       <div v-for="item in orderedItems" :key="item.id" >
         <v-list-item class="px-0">
           <v-list-item-content>
-            <v-list-item-title class="body-1 font-weight-bold" v-text="item.title"></v-list-item-title>
+            <v-list-item-title class="body-1 font-weight-bold" v-text="item.name"></v-list-item-title>
             <v-list-item-subtitle class="body-1 font-weight-light" v-text="item.timestamp"></v-list-item-subtitle>
           </v-list-item-content>
 

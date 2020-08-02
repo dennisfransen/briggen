@@ -39,7 +39,7 @@
               <span class="font-weight-bold">
                 {{ item.amount }} 
               </span>
-              {{ item.title }}</p>
+              {{ item.name }}</p>
             <p class="body-1">{{ item.price }} kr/st</p>
           </v-row>
           <v-divider></v-divider>
@@ -77,15 +77,16 @@ export default {
     orderItems() {
       let result = {};
       this.getOrderItems.forEach((item) => {
-        if (!result[item.title]) {
-          result[item.title] = {
+        if (!result[item.name]) {
+          result[item.name] = {
             amount: 0,
-            title: item.title,
+            name: item.name,
             price: item.price,
           };
         }
-        ++result[item.title].amount;
+        ++result[item.name].amount;
       });
+      console.log(result)
       return result;
     },
   },

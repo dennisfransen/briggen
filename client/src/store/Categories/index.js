@@ -19,8 +19,8 @@ export default {
   actions: {
     fetchCategories({ commit }) {
       const categories = [
-        { id: 0, title: "Asiatiskt", imgUrl: "" },
-        { id: 1, title: "Grekiskt", imgUrl: "" },
+        { id: 0, title: "Grekiskt", imgUrl: "" },
+        { id: 1, title: "Asiatiskt", imgUrl: "" },
         { id: 2, title: "Amerikanskt", imgUrl: "" },
         { id: 3, title: "Italienskt", imgUrl: "" },
       ];
