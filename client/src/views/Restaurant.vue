@@ -1,5 +1,5 @@
 <template>
-  <div v-if="restaurant">
+  <div v-if="getRestaurant">
     <v-img src="@/assets/wineanddine.jpg" height="250">
       <v-btn class="px-0 white" min-width="36" absolute top left @click="onGoBackPressed">
         <v-icon color="secondary lighten-2">mdi-chevron-left</v-icon>
@@ -7,7 +7,7 @@
       <div class="img-bottom">
         <v-container>
           <v-row no-gutters>
-            <h2 class="title white--text">{{ restaurant.title }}</h2>
+            <h2 class="title white--text">{{ getRestaurant.title }}</h2>
           </v-row>
           <v-row no-gutters>
             <v-col cols="6">
@@ -15,7 +15,7 @@
               <span class="body-2 white--text">inom 2km</span>
             </v-col>
             <v-col cols="6" class="text-end">
-              <StarRating class="mr-4" v-model="restaurant.rating" font-size="subtitle-1" justify="end" font-color="white--text"/>
+              <StarRating class="mr-4" v-model="getRestaurant.star_value" font-size="subtitle-1" justify="end" font-color="white--text"/>
             </v-col>
           </v-row>
         </v-container>
@@ -26,7 +26,7 @@
       <h3 class="subtitle-2">Information</h3>
       <div class="py-2"></div>
       <p class="caption">
-        {{ restaurant.description }}
+        {{ getRestaurant.description }}
       </p>
       <h3 class="subtitle-2">Meny</h3>
     </v-container>
@@ -49,15 +49,15 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Restaurant",
-  mounted() {
-    this.fetchRestaurant();
+  async created() {
+    this.fetchRestaurant(this.$route.params.id);
     this.fetchCategoriesWithProducts();
-    this.restaurant = this.getRestaurant;
+    // this.restaurant = this.getRestaurant;
     this.categories = this.getCategoriesWithProducts
   },
   data: () => ({
-    restaurant: null,
-    categories: null, 
+    // restaurant: null,
+    categories: null,
   }),
   computed: {
     ...mapGetters("Restaurant", [

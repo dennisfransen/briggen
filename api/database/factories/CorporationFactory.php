@@ -13,12 +13,13 @@ use Illuminate\Support\Str;
 |
 | This directory should contain each of the model factory definitions for
 | your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
+| model instances for testing / seeding your application"s database.
 |
 */
 
 $factory->define(Corporation::class, function (Faker $faker) {
     return [
-        'title' => $faker->title,
+        "title" => $faker->title,
+        "description" => $faker->sentence(30),
     ];
 });

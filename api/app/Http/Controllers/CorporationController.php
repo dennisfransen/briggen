@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CorporationResource;
 use App\Models\Corporation;
 use Fasberg\PrettyResponse\Facade\PrettyResponseFacade;
 use Illuminate\Http\Request;
 
 class CorporationController extends Controller
 {
+    public function index()
+    {
+        return PrettyResponseFacade::wrap(CorporationResource::collection(Corporation::all()));
+    }
+
     /**
      * @param Request $request
      * @return mixed
@@ -36,7 +42,7 @@ class CorporationController extends Controller
      */
     public function show(Corporation $corporation)
     {
-        return PrettyResponseFacade::wrap($corporation->load(["vouchers"])->toArray());
+        return PrettyResponseFacade::wrap(new CorporationResource($corporation->load(["vouchers", "products"])));
     }
 
     /**
@@ -51,6 +57,7 @@ class CorporationController extends Controller
     public function update(Corporation $corporation, Request $request)
     {
         $corporation->title = $request->title;
+        $corporation->description = $request->description;
         $corporation->save();
 
         return PrettyResponseFacade::wrap($corporation->toArray());

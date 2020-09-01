@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +30,8 @@ Route::prefix("v1")->group(
                     "AuthController@facebookLogin"
                 )->name("login.facebook");
 
-                Route::resource("corporations", "CorporationController")->only(["store", "show", "update"]);
+                Route::resource("corporations", "CorporationController")
+                    ->only(["index", "store", "show", "update"]);
             }
         );
 

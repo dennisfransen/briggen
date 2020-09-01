@@ -1,8 +1,11 @@
+import CorporationService from "@/services/CorporationService";
 
 export default {
     namespaced: true,
     state: {
-      restaurant: {},
+      restaurant: {
+        "star_value": 0
+      },
       categoriesWithProducts: [],
       categories: [],
       products: [],
@@ -30,15 +33,12 @@ export default {
       },
     },
     actions: {
-      fetchRestaurant({ commit }) {
-        const restaurant = {
-          id: 1,
-          title: "Restaurang Briggen",
-          description:
-            "Lorem ipsum dolor sitamet consectetur adipisicing elit. Dignissimos temporibus dicta quas doloribus molestias reiciendis aut, similique incidunt excepturi vero iste facere modi magnam veritatis neque ut architecto porro impedit, voluptas quos deleniti commodi, dolor quamaliquid. Magni, a eos!",
-          rating: 4,
-        };
-        commit("setRestaurant", restaurant);
+      fetchRestaurant({ commit }, id) {
+        CorporationService.show(id)
+          .then(response => {
+            commit("setRestaurant", response.data.data);
+            return response.data.data;
+          });
       },
       fetchCategoriesWithProducts({ commit }) {
         const categoriesWithProducts = [
